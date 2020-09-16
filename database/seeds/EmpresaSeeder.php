@@ -14,7 +14,7 @@ class EmpresaSeeder extends Seeder
     {
         $empresa = new Empresa();
         $empresa -> nombre_empr = 'RepuestosFreddy';
-        $empresa -> estado_empr = 'A';
+        $empresa -> estado_empr = 'Activo';
         $empresa -> created_by = 1;
         $empresa -> updated_by = 1;
         $empresa ->save();
