@@ -40,11 +40,9 @@
                         <label for="estado_tk">Estado</label>
                         <select name="estado_tk" class="form-control">
                             <option value="">Selecionar</option>
-                            <option value="Nuevo" selected>Nuevo</option>
-                            <option value="Abierto">Abierto</option>
-                            <option value="Pendiente">Pendiente</option>
-                            <option value="Abierto">En Espera</option>
-                            <option value="Pendiente">Resuelto</option>
+                            @foreach($estados as $estado)
+                                <option value="{{$estado->id}}">{{$estado->nombre_est}}</option>
+                            @endforeach
                         </select>
                     </div>
                   </div>

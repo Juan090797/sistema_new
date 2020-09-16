@@ -79,6 +79,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{ route('estado.index') }}" class="nav-link " >
+              <i class="nav-icon fa fa-thermometer-half"></i>
+              <p>
+                Estados
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ route('categoria.index') }}" class="nav-link" >
               <i class="nav-icon fa fa-thumbtack"></i>
               <p>

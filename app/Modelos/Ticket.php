@@ -18,6 +18,10 @@ class Ticket extends Model
         return $this->belongsTo('App\Modelos\Categoria');
     }
 
+    public function estado(){
+        return $this->belongsTo('App\Modelos\Estado_tk');
+    }
+
     public function prioridad(){
         return $this->belongsTo('App\Modelos\Prioridad');
     }

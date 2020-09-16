@@ -22,6 +22,7 @@ Route::resource('empresas', 'EmpresaController')->names('empresa');
 Route::resource('areas', 'AreaController')->names('area');
 
 Route::resource('categorias', 'CategoriaController')->names('categoria');
+Route::resource('estados', 'Estado_tkController')->names('estado');
 Route::resource('prioridad', 'PrioridadController')->names('prioridad');
 Route::resource('tipo_tk', 'Tipo_tkController')->names('tipo_tk');
 Route::post('/ticket/comentario','TicketController@comentarioGuardar')->name('comentario.guardar');

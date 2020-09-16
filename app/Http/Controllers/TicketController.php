@@ -8,6 +8,7 @@ use App\Modelos\Prioridad;
 use App\Modelos\Ticket;
 use App\User;
 use App\Modelos\Comentario;
+use App\Modelos\Estado_tk;
 use App\Modelos\Tipo_tk;
 use App\Notifications\ComentarioNotify;
 use Illuminate\Http\Request;
@@ -41,9 +42,10 @@ class TicketController extends Controller
         $tipos = Tipo_tk::all();
         $categorias = Categoria::all();
         $prioridades = Prioridad::all();
+        $estados = Estado_tk::all();
         $usuarios = User::all();
         if(Auth::check()){
-            return view('tickets.create', ["tipos" => $tipos, "categorias" => $categorias, "prioridades" => $prioridades, "usuarios" => $usuarios]);
+            return view('tickets.create', ["tipos" => $tipos, "categorias" => $categorias, "prioridades" => $prioridades, "usuarios" => $usuarios, "estados" => $estados]);
         }else{
             return view('tickets.createwait', ["tipos" => $tipos, "categorias" => $categorias, "prioridades" => $prioridades, "usuarios" => $usuarios]);
         }
