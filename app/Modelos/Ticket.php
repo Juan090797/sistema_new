@@ -30,6 +30,10 @@ class Ticket extends Model
         return $this->belongsTo('App\User', 'requester_user_id');
     }
 
+    public function tecnico(){
+        return $this->belongsTo('App\User', 'user_id');
+    }
+
     public function comentarios(){
         return $this->hasMany('App\Modelos\Comentario');
     }

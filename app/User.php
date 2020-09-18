@@ -53,6 +53,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Modelos\Ticket', 'requester_user_id');
     }
 
+    public function tecnico(){
+        return $this->hasMany('App\Modelos\Ticket', 'user_id');
+    }
+
     public function comentarios(){
         return $this->hasMany('App\Modelos\Comentario');
     }

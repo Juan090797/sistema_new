@@ -8,3 +8,4 @@ Auth::routes();
 Route::resource('ticket', 'TicketController')->names('ticket');
 
 // Route::get('ticket/{id}', 'TicketController@show')->names('ticketuser');
+Route::post('/ticket/comentario','TicketController@comentarioGuardar')->name('comentario.guardar');

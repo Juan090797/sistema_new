@@ -17,7 +17,6 @@ class CreateTicketsTable extends Migration
             $table->id();
             $table->string('titulo_tk');
             $table->string('descripcion_tk');
-            $table->string('estado_tk');
             $table->timestamps();
 
             //relacionando ticket con la tabla tipos_tk.
@@ -29,6 +28,12 @@ class CreateTicketsTable extends Migration
             //relacionando ticket con la tabla categorias_tk.
             $table->unsignedBigInteger('categoria_id')->nullable(false);
             $table->foreign('categoria_id')->references('id')->on('categorias_tk')
+                  ->onUpdate('cascade')->onDelete('cascade');
+            //fin de la relacion
+
+            //relacionando ticket con la tabla categorias_tk.
+            $table->unsignedBigInteger('estado_id')->nullable(false);
+            $table->foreign('estado_id')->references('id')->on('estados_tk')
                   ->onUpdate('cascade')->onDelete('cascade');
             //fin de la relacion
 

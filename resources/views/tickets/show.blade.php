@@ -22,7 +22,7 @@
                 <div class="card-body">
                     <div class="post">
                         <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="{{ asset('img/user1-128x128.jpg')}}" alt="user image">
+                        <img class="img-circle img-bordered-sm" src="{{ asset('storage/image_profiles/'.$ticket->user->image_path)}}" alt="user image">
                         <span class="username">
                             <h4 style="color:#0A7BBB";>{{$ticket->user->first_name.' '. $ticket->user->last_name}}</h4>
                         </span>
@@ -32,17 +32,16 @@
                             {{$ticket->descripcion_tk}}
                         </p>
                         <p>
-                            <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Compartir</a>
+                            <a href="#" class="link-black text-sm mr-2"></a>
                             <span class="float-right">
-                            <a href="#" class="link-black text-sm">
                                 <i class="far fa-comments mr-1"></i> Comentarios ({{count($comentarios)}})
-                            </a>
                             </span>
                         </p>
                         <form method="POST" action="{{ route('comentario.guardar') }}">
                             @csrf
                             <div class="input-group mb-3">
                                 <input type="hidden" name="ticket_id" id="ticket_id" value="{{$ticket->id}}">
+                                <input type="hidden" name="user_id" id="user_id" value="{{$ticket->user->id}}">
                                 <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Comentar">
                                 <div class="input-group-append">
                                 <button class="btn btn-outline-success float-righ" type="submit" id="button-addon2">Enviar</button>
@@ -104,21 +103,16 @@
                     @method('PATCH')
                     @csrf
                         <div class="form-group">
-                            <label for="estado_tk">Estado</label>
-                            <select class="form-control" id="estado_tk">
-                                @if ($ticket->estado_tk == "Activo")
-                                    <option value="">Selecionar</option>
-                                    <option value="Activo" selected>Activo</option>
-                                    <option value="Inactivo">Inactivo</option>
-                                @elseif ($ticket->estado_tk == "Inactivo")
-                                    <option value="">Selecionar</option>
-                                    <option value="Activo">Activo</option>
-                                    <option value="Inactivo" selected>Inactivo</option>
-                                @else
-                                    <option value="" selected>Selecionar</option>
-                                    <option value="Activo">Activo</option>
-                                    <option value="Inactivo">Inactivo</option>
-                                @endif
+                            <label for="estado_id">Estado</label>
+                            <select name="estado_id" class="form-control">
+                                <option value="">Selecionar</option>
+                                @foreach($estados as $estado)
+                                    @if ($ticket->estado_id == $estado->id)
+                                        <option value="{{$estado->id}}" selected>{{$estado->nombre_est}}</option>
+                                    @else
+                                        <option value="{{$estado->id}}">{{$estado->nombre_est}}</option>
+                                    @endif
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
@@ -149,10 +143,14 @@
                         </div>
                         <div class="form-group">
                             <label for="user_id">Tecnico</label>
-                            <select name="user_id" class="form-control">
+                            <select name="user_id" class="form-control" id="user_id">
                                 <option value="">Selecionar</option>
                                 @foreach($usuarios as $usuario)
-                                    <option value="{{$usuario->id}}">{{$usuario->first_name}}</option>
+                                    @if ($ticket->user_id == $usuario->id)
+                                        <option value="{{$usuario->id}}" selected>{{$usuario->first_name}}</option>
+                                    @else
+                                        <option value="{{$usuario->id}}">{{$usuario->first_name}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>

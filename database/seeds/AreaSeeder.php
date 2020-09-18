@@ -18,5 +18,12 @@ class AreaSeeder extends Seeder
         $area -> created_by = 1;
         $area -> updated_by = 1;
         $area ->save();
+
+        $area = new Area();
+        $area -> nombre_area = 'Recursos Humanos';
+        $area -> estado_area = 'Activo';
+        $area -> created_by = 1;
+        $area -> updated_by = 1;
+        $area ->save();
     }
 }

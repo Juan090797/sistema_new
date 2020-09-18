@@ -67,19 +67,7 @@
                         <div class="col-md-4">
                             <div class="user-block">
                                 <span class="description">Estado:
-                                    @if ( $ticket->estado_tk === "Nuevo")
-                                        <span class="badge bg-success">{{$ticket->estado_tk}}</span>
-                                    @elseif ( $ticket->estado_tk === "Abierto")
-                                        <span class="badge bg-purple">{{$ticket->estado_tk}}</span>
-                                    @elseif ( $ticket->estado_tk === "Pendiente")
-                                        <span class="badge bg-warning">{{$ticket->estado_tk}}</span>
-                                    @elseif ( $ticket->estado_tk === "En espera")
-                                        <span class="badge bg-info">{{$ticket->estado_tk}}</span>
-                                    @elseif ( $ticket->estado_tk === "Resuelto")
-                                        <span class="badge bg-primary">{{$ticket->estado_tk}}</span>
-                                    @else
-                                        <span class="badge bg-danger">{{$ticket->estado_tk}}</span>
-                                    @endif
+                                    {{$ticket->estado->nombre_est}}
                                 </span>
                                 <span class="description">Categoria: {{$ticket->categoria->nombre_cat}}</span>
                                 <span class="description">Prioridad:
@@ -91,6 +79,7 @@
                                         <span class="badge bg-success">{{$ticket->prioridad->nombre_pri}}</span>
                                     @endif
                                 </span>
+                                <span class="description">Tecnico: {{$ticket->user_id}}</span>
                             </div>
                         </div>
                     </div>

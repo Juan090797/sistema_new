@@ -47,8 +47,8 @@
                     <span class="info-box-icon bg-success elevation-1"><i class="nav-icon fa fa-ticket-alt"></i></span>
 
                     <div class="info-box-content">
-                    <span class="info-box-text">Tickets Activos</span>
-                    <span class="info-box-number">{{count($ticket_abierto)}}</span>
+                    <span class="info-box-text">Total Tickets</span>
+                    <span class="info-box-number">{{count($ticket_total)}}</span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -92,7 +92,8 @@
                                     <thead>
                                         <tr>
                                             <th>Titulo</th>
-                                            <th>Usuario</th>
+                                            <th>Solicitante</th>
+                                            <th>Estado</th>
                                             <th>Fecha Creacion</th>
                                             <th>Fecha Actualizacion</th>
                                         </tr>
@@ -102,6 +103,7 @@
                                             <tr>
                                                 <td><a href="{{ route('ticket.show', $ticket_ultimo->id)}}">{{$ticket_ultimo->titulo_tk}}</a></td>
                                                 <td>{{$ticket_ultimo->user->first_name}}</td>
+                                                <td>{{$ticket_ultimo->estado->nombre_est}}</td>
                                                 <td>{{$ticket_ultimo->created_at->diffForHumans()}}</td>
                                                 <td>{{$ticket_ultimo->updated_at->diffForHumans()}}</td>
                                             </tr>
@@ -110,7 +112,8 @@
                                     <tfoot>
                                         <tr>
                                             <th>Titulo</th>
-                                            <th>Usuario</th>
+                                            <th>Solicitante</th>
+                                            <th>Estado</th>
                                             <th>Fecha Creacion</th>
                                             <th>Fecha Actualizacion</th>
                                         </tr>

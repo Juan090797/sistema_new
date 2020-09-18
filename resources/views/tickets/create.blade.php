@@ -37,8 +37,8 @@
                         <textarea type="text" name="descripcion_tk" id="descripcion_tk" class="form-control" placeholder="Descripcion del problema"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="estado_tk">Estado</label>
-                        <select name="estado_tk" class="form-control">
+                        <label for="estado_id">Estado</label>
+                        <select name="estado_id" class="form-control">
                             <option value="">Selecionar</option>
                             @foreach($estados as $estado)
                                 <option value="{{$estado->id}}">{{$estado->nombre_est}}</option>

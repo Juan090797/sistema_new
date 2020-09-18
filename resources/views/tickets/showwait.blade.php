@@ -65,16 +65,17 @@
                             {{-- </a> --}}
                             </span>
                         </p>
-                        {{-- <form method="POST" action="{{ route('comentario.guardar') }}">
+                        <form method="POST" action="{{ route('comentario.guardar') }}">
                             @csrf
                             <div class="input-group mb-3">
                                 <input type="hidden" name="ticket_id" id="ticket_id" value="{{$ticket->id}}">
+                                <input type="hidden" name="user_id" id="user_id" value="{{$ticket->user->id}}">
                                 <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Comentar">
                                 <div class="input-group-append">
                                 <button class="btn btn-outline-success float-righ" type="submit" id="button-addon2">Enviar</button>
                                 </div>
                             </div>
-                        </form> --}}
+                        </form>
                     </div>
                 </div>
             </div>
@@ -128,21 +129,16 @@
                     @method('PATCH')
                     @csrf
                         <div class="form-group">
-                            <label for="estado_tk">Estado</label>
-                            <select class="form-control" id="estado_tk" disabled>
-                                @if ($ticket->estado_tk == "Activo")
-                                    <option value="">Selecionar</option>
-                                    <option value="Activo" selected>Activo</option>
-                                    <option value="Inactivo">Inactivo</option>
-                                @elseif ($ticket->estado_tk == "Inactivo")
-                                    <option value="">Selecionar</option>
-                                    <option value="Activo">Activo</option>
-                                    <option value="Inactivo" selected>Inactivo</option>
-                                @else
-                                    <option value="" selected>Selecionar</option>
-                                    <option value="Activo">Activo</option>
-                                    <option value="Inactivo">Inactivo</option>
-                                @endif
+                            <label for="estado_id">Estado</label>
+                            <select name="estado_id" class="form-control" disabled>
+                                <option value="">Selecionar</option>
+                                @foreach($estados as $estado)
+                                    @if ($ticket->estado_id == $estado->id)
+                                        <option value="{{$estado->id}}" selected>{{$estado->nombre_est}}</option>
+                                    @else
+                                        <option value="{{$estado->id}}">{{$estado->nombre_est}}</option>
+                                    @endif
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
@@ -173,10 +169,14 @@
                         </div>
                         <div class="form-group">
                             <label for="user_id">Tecnico</label>
-                            <select name="user_id" class="form-control" disabled>
+                            <select name="user_id" class="form-control" id="user_id" disabled>
                                 <option value="">Selecionar</option>
                                 @foreach($usuarios as $usuario)
-                                    <option value="{{$usuario->id}}">{{$usuario->first_name}}</option>
+                                    @if ($ticket->user_id == $usuario->id)
+                                        <option value="{{$usuario->id}}" selected>{{$usuario->first_name}}</option>
+                                    @else
+                                        <option value="{{$usuario->id}}">{{$usuario->first_name}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>

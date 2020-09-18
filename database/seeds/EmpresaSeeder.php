@@ -18,5 +18,12 @@ class EmpresaSeeder extends Seeder
         $empresa -> created_by = 1;
         $empresa -> updated_by = 1;
         $empresa ->save();
+
+        $empresa = new Empresa();
+        $empresa -> nombre_empr = 'Gc Importadores';
+        $empresa -> estado_empr = 'Activo';
+        $empresa -> created_by = 1;
+        $empresa -> updated_by = 1;
+        $empresa ->save();
     }
 }

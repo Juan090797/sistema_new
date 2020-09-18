@@ -14,5 +14,6 @@ class Estado_tk extends Model
 
     public function ticket(){
         return $this->hasMany('App\Modelos\Ticket');
+
     }
 }
