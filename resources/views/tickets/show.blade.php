@@ -22,9 +22,9 @@
                 <div class="card-body">
                     <div class="post">
                         <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="{{ asset('storage/image_profiles/'.$ticket->user->image_path)}}" alt="user image">
+                        <img class="img-circle img-bordered-sm" src="{{ asset('storage/image_profiles/'.$ticket->requesteruser->image_path)}}" alt="user image">
                         <span class="username">
-                            <h4 style="color:#0A7BBB";>{{$ticket->user->first_name.' '. $ticket->user->last_name}}</h4>
+                            <h4 style="color:#0A7BBB";>{{$ticket->requesteruser->first_name.' '. $ticket->requesteruser->last_name}}</h4>
                         </span>
                         <span class="description">{{$ticket->created_at->diffForHumans()}}</span>
                         </div>
@@ -41,7 +41,7 @@
                             @csrf
                             <div class="input-group mb-3">
                                 <input type="hidden" name="ticket_id" id="ticket_id" value="{{$ticket->id}}">
-                                <input type="hidden" name="user_id" id="user_id" value="{{$ticket->user->id}}">
+                                <input type="hidden" name="user_id" id="user_id" value="{{$ticket->requesteruser->id}}">
                                 <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Comentar">
                                 <div class="input-group-append">
                                 <button class="btn btn-outline-success float-righ" type="submit" id="button-addon2">Enviar</button>
@@ -142,11 +142,11 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="user_id">Tecnico</label>
-                            <select name="user_id" class="form-control" id="user_id">
+                            <label for="tecnico_user_id">Tecnico</label>
+                            <select name="tecnico_user_id" class="form-control" id="tecnico_user_id">
                                 <option value="">Selecionar</option>
                                 @foreach($usuarios as $usuario)
-                                    @if ($ticket->user_id == $usuario->id)
+                                    @if ($ticket->tecnico_user_id == $usuario->id)
                                         <option value="{{$usuario->id}}" selected>{{$usuario->first_name}}</option>
                                     @else
                                         <option value="{{$usuario->id}}">{{$usuario->first_name}}</option>

@@ -52,12 +52,12 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="user-block">
-                                <img class="img-circle img-bordered-sm" src="{{ asset('storage/image_profiles/'.$ticket->user->image_path)}}" alt="user image">
+                                <img class="img-circle img-bordered-sm" src="{{ asset('storage/image_profiles/'.$ticket->requesteruser->image_path)}}" alt="user image">
                                 <span class="username">
                                 <a href="{{ route('ticket.show', $ticket->id)}}">{{$ticket->titulo_tk}}</a>
                                 </span>
                                 <span class="description">
-                                    {{$ticket->user->first_name.' '. $ticket->user->last_name}}
+                                    {{$ticket->requesteruser->first_name.' '. $ticket->requesteruser->last_name}}
                                 </span>
                                 <span class="description">
                                     {{$ticket->created_at->diffForHumans()}}
@@ -79,7 +79,7 @@
                                         <span class="badge bg-success">{{$ticket->prioridad->nombre_pri}}</span>
                                     @endif
                                 </span>
-                                <span class="description">Tecnico: {{$ticket->user_id}}</span>
+                                <span class="description">Tecnico: {{$ticket->tecnicouser->first_name}}</span>
                             </div>
                         </div>
                     </div>

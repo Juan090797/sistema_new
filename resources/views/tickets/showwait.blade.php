@@ -69,7 +69,7 @@
                             @csrf
                             <div class="input-group mb-3">
                                 <input type="hidden" name="ticket_id" id="ticket_id" value="{{$ticket->id}}">
-                                <input type="hidden" name="user_id" id="user_id" value="{{$ticket->user->id}}">
+                                <input type="hidden" name="user_id" id="user_id" value="{{$ticket->requesteruser->id}}">
                                 <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Comentar">
                                 <div class="input-group-append">
                                 <button class="btn btn-outline-success float-righ" type="submit" id="button-addon2">Enviar</button>

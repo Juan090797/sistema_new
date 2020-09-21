@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Modelos\Ticket;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -50,11 +51,7 @@ class User extends Authenticatable
     }
 
     public function ticket(){
-        return $this->hasMany('App\Modelos\Ticket', 'requester_user_id');
-    }
-
-    public function tecnico(){
-        return $this->hasMany('App\Modelos\Ticket', 'user_id');
+        return $this->hasMany(Ticket::class, 'requester_user_id', 'tecnico_user_id');
     }
 
     public function comentarios(){

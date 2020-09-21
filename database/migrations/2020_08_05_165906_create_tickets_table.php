@@ -50,8 +50,8 @@ class CreateTicketsTable extends Migration
             //fin de la relacion
 
             //relacionando ticket con la tabla users.
-            $table->unsignedBigInteger('user_id')->nullable(true);
-            $table->foreign('user_id')->references('id')->on('users')
+            $table->unsignedBigInteger('tecnico_user_id')->nullable(true);
+            $table->foreign('tecnico_user_id')->references('id')->on('users')
                   ->onUpdate('cascade')->onDelete('cascade');
             //fin de la relacion
 

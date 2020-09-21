@@ -30,6 +30,7 @@ class TicketController extends Controller
     {
         // $tickets = Auth::user()->ticket()->orderBy("id","desc")->get();
         $tickets = Ticket::orderBy("id","desc")->get();
+        // dd($tickets);
 
         return view('tickets.index', ['tickets' => $tickets]);
     }
@@ -68,6 +69,7 @@ class TicketController extends Controller
         $ticket -> categoria_id = 1;
         $ticket -> tipo_id = 1;
         $ticket -> estado_id = 1;
+        $ticket -> tecnico_user_id  = 1;
         $ticket -> requester_user_id = $request->input('requester_user_id');
         $ticket -> created_by = $request->input('requester_user_id');
         $ticket -> updated_by = $request->input('requester_user_id');
@@ -172,7 +174,7 @@ class TicketController extends Controller
     public function update(UpdateTicketRequest $request, Ticket $ticket)
     {
         $ticket->fill($request->all());
-        $ticket -> user_id = $request->input('user_id');
+        $ticket -> tecnico_user_id = $request->input('tecnico_user_id');
         $ticket -> estado_id = $request->input('estado_id');
         $ticket -> created_by = Auth::user()->id;
         $ticket -> updated_by = Auth::user()->id;

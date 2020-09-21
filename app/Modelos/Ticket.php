@@ -26,12 +26,12 @@ class Ticket extends Model
         return $this->belongsTo('App\Modelos\Prioridad');
     }
 
-    public function user(){
+    public function requesteruser(){
         return $this->belongsTo('App\User', 'requester_user_id');
     }
 
-    public function tecnico(){
-        return $this->belongsTo('App\User', 'user_id');
+    public function tecnicouser(){
+        return $this->belongsTo('App\User', 'tecnico_user_id');
     }
 
     public function comentarios(){

@@ -93,6 +93,7 @@
                                         <tr>
                                             <th>Titulo</th>
                                             <th>Solicitante</th>
+                                            <th>Tecnico</th>
                                             <th>Estado</th>
                                             <th>Fecha Creacion</th>
                                             <th>Fecha Actualizacion</th>
@@ -102,7 +103,8 @@
                                         @foreach ($ticket_ultimos as $ticket_ultimo)
                                             <tr>
                                                 <td><a href="{{ route('ticket.show', $ticket_ultimo->id)}}">{{$ticket_ultimo->titulo_tk}}</a></td>
-                                                <td>{{$ticket_ultimo->user->first_name}}</td>
+                                                <td>{{$ticket_ultimo->requesteruser->first_name}}</td>
+                                                <td>{{$ticket_ultimo->tecnicouser->first_name}}</td>
                                                 <td>{{$ticket_ultimo->estado->nombre_est}}</td>
                                                 <td>{{$ticket_ultimo->created_at->diffForHumans()}}</td>
                                                 <td>{{$ticket_ultimo->updated_at->diffForHumans()}}</td>
@@ -113,6 +115,7 @@
                                         <tr>
                                             <th>Titulo</th>
                                             <th>Solicitante</th>
+                                            <th>Tecnico</th>
                                             <th>Estado</th>
                                             <th>Fecha Creacion</th>
                                             <th>Fecha Actualizacion</th>
