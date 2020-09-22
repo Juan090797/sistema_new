@@ -24,5 +24,18 @@ class UserSeeder extends Seeder
         $user -> created_by = 1;
         $user -> updated_by = 1;
         $user ->save();
+
+        $user = new User();
+        $user -> email = 'soporte@repuestosfreddy.com';
+        $user -> username = 'soporte';
+        $user -> first_name = 'Soporte';
+        $user -> last_name = 'soporte';
+        $user -> password = bcrypt('soporte');
+        $user -> empresa_id = 1;
+        $user -> image_path ='default_profile.png';
+        $user -> area_id = 1;
+        $user -> created_by = 1;
+        $user -> updated_by = 1;
+        $user ->save();
     }
 }

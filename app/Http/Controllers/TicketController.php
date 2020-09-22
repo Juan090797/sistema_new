@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\Mensaje;
 use Illuminate\Support\Facades\Notification;
-
+use Illuminate\Support\Facades\Storage;
 
 class TicketController extends Controller
 {
@@ -63,17 +63,33 @@ class TicketController extends Controller
      */
     public function store(CreateTicketRequest $request,Ticket $ticket)
     {
-        $ticket = new Ticket();
-        $ticket->fill($request->all());
-        $ticket -> prioridad_id = 1;
-        $ticket -> categoria_id = 1;
-        $ticket -> tipo_id = 1;
-        $ticket -> estado_id = 1;
-        $ticket -> tecnico_user_id  = 1;
-        $ticket -> requester_user_id = $request->input('requester_user_id');
-        $ticket -> created_by = $request->input('requester_user_id');
-        $ticket -> updated_by = $request->input('requester_user_id');
-        $ticket -> save();
+        if(Auth::check()){
+
+
+
+        }else{
+
+
+            $ticket = new Ticket();
+            $ticket->fill($request->all());
+            $ticket -> prioridad_id = 1;
+            $ticket -> categoria_id = 1;
+            $ticket -> tipo_id = 1;
+            $ticket -> estado_id = 1;
+            $ticket -> tecnico_user_id  = 2;
+            $ticket -> requester_user_id = $request->input('requester_user_id');
+
+            if ($request->hasFile('archivo_tk')){
+                $ubicacion = 'public\archivos';
+                $archivo_name = $request->archivo_tk->getClientOriginalName();
+                $path = $request->file('archivo_tk')->storeAs($ubicacion, $archivo_name);
+                $ticket -> archivo_tk = $archivo_name;
+            }
+
+            $ticket -> created_by = $request->input('requester_user_id');
+            $ticket -> updated_by = $request->input('requester_user_id');
+            $ticket -> save();
+        }
 
         $from = User::findOrFail($request->input('requester_user_id'));
 
@@ -114,6 +130,13 @@ class TicketController extends Controller
             'prioridades' => $prioridades, 'usuarios' => $usuarios, 'estados' => $estados]);
         }
 
+    }
+
+    public function getDownload($archivo){
+
+            // $pathtoFile = public_path().'/archivos/'.$archivo;
+
+            return response()->download('storage/archivos/'.$archivo);
     }
 
     public function comentarioGuardar(Request $request){

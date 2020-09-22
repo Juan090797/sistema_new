@@ -36,6 +36,9 @@
                             <span class="float-right">
                                 <i class="far fa-comments mr-1"></i> Comentarios ({{count($comentarios)}})
                             </span>
+                            <span class="float-left">
+                            <a href="/download/{{$ticket->archivo_tk}}">{{$ticket->archivo_tk}}</a>
+                            </span>
                         </p>
                         <form method="POST" action="{{ route('comentario.guardar') }}">
                             @csrf

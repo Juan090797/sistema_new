@@ -98,26 +98,20 @@ class UserController extends Controller
 
         $image_name = $user->id.'.'.$request->image->getClientOriginalExtension();
         $status = 'success';
-
         $content = 'La imagen ha sido correctamente cargada';
 
         try {
 
             DB::beginTransaction();
-
             $user->image_path = $image_name;
             $request->image->storeAs('public\image_profiles', $image_name);
-
             $user->save();
-
             DB::commit();
 
         } catch (\Throwable $th) {
 
             DB::rollBack();
-
             $status = 'error';
-
             $content = 'Se produjo un error al momento de la carga de la imagen';
         }
 

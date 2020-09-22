@@ -17,6 +17,7 @@ class CreateTicketsTable extends Migration
             $table->id();
             $table->string('titulo_tk');
             $table->string('descripcion_tk');
+            $table->string('archivo_tk', 200)->nullable(true);
             $table->timestamps();
 
             //relacionando ticket con la tabla tipos_tk.

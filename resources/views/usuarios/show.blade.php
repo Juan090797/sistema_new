@@ -369,30 +369,29 @@
     </div>
 
     {{-- MODAL IMAGEN --}}
-        <div class="modal fade" id="imagen-modal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Agregar Imagen</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <div class="modal fade" id="imagen-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Agregar Imagen</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form method="post" action="{{ route('user.image', $user->id) }}" enctype="multipart/form-data">
+                    </button>
+                </div>
+                <form method="post" action="{{ route('user.image', $user->id) }}" enctype="multipart/form-data">
                     @method('PATCH')
                     @csrf
-                        <div class="div modal-body">
-                            <input type="file" name="image">
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default btn_outline-danger" data-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-outline-success">Grabar</button>
-                        </div>
-                    </form>
-
-                </div>
+                    <div class="div modal-body">
+                        <input type="file" name="image">
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default btn_outline-danger" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-outline-success">Grabar</button>
+                    </div>
+                </form>
             </div>
-      </div>
+        </div>
+    </div>
  </div>
 @endsection
 
