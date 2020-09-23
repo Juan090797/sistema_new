@@ -13,6 +13,7 @@ use App\Modelos\Comentario;
 use App\Modelos\Estado_tk;
 use App\Modelos\Tipo_tk;
 use App\Notifications\ComentarioNotify;
+use App\Notifications\CloseNotify;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\Mensaje;
@@ -91,11 +92,11 @@ class TicketController extends Controller
             $ticket -> save();
         }
 
-        $from = User::findOrFail($request->input('requester_user_id'));
+        // $from = User::findOrFail($request->input('requester_user_id'));
 
-        Notification::send($from, new Mensaje($ticket));
+        // Notification::send($from, new Mensaje($ticket));
 
-        Notification::route('mail', 'juan.marquina@repuestosfreddy.com')
+        Notification::route('mail', 'soporte@repuestosfreddy.com')
             ->notify(new Mensaje($ticket));
 
         // return redirect()->view('tickets.createwait')->with('success', 'Ticket Creado');
@@ -150,8 +151,8 @@ class TicketController extends Controller
             $comentario -> updated_by = Auth::user()->id;
             $comentario->save();
 
-            $from = User::findOrFail($user);
-            Notification::send($from, new ComentarioNotify($comentario));
+            // $from = User::findOrFail($user);
+            // Notification::send($from, new ComentarioNotify($comentario));
 
         }else{
 
@@ -163,13 +164,13 @@ class TicketController extends Controller
             $comentario -> updated_by = User::findOrFail($user)->id;
             $comentario->save();
 
-            $from = User::findOrFail($user);
-            Notification::send($from, new ComentarioNotify($comentario));
+            // $from = User::findOrFail($user);
+            // Notification::send($from, new ComentarioNotify($comentario));
         }
 
         // Notification::send($from, new ComentarioNotify($comentario));
 
-        Notification::route('mail', 'juan.marquina@repuestosfreddy.com')
+        Notification::route('mail', 'soporte@repuestosfreddy.com')
             ->notify(new ComentarioNotify($comentario));
 
         return redirect()->route('ticket.show',['ticket'=>$request->input('ticket_id')]);
@@ -208,6 +209,12 @@ class TicketController extends Controller
         $evento -> user_id = Auth::user()->id;
         $evento -> ticket_id = $ticket->id;
         $evento -> save();
+
+        if($ticket->estado->nombre_est == "Cerrado"){
+
+            Notification::route('mail', 'soporte@repuestosfreddy.com')
+            ->notify(new CloseNotify($ticket));
+        }
 
         return redirect()->route('ticket.show', $ticket->id);
     }

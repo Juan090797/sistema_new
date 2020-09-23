@@ -37,7 +37,7 @@
                                 <i class="far fa-comments mr-1"></i> Comentarios ({{count($comentarios)}})
                             </span>
                             <span class="float-left">
-                            <a href="/download/{{$ticket->archivo_tk}}">{{$ticket->archivo_tk}}</a>
+                                <a href="/download/{{$ticket->archivo_tk}}">{{$ticket->archivo_tk}}</a>
                             </span>
                         </p>
                         <form method="POST" action="{{ route('comentario.guardar') }}">
@@ -160,7 +160,7 @@
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-outline-success float-right">Guardar</button>
-                        <a href="{{ route('empresa.index') }}" class="btn btn-outline-danger">Cancel</a>
+                        <a href="{{ route('empresa.index') }}" class="btn btn-outline-danger">Cancelar</a>
                     </div>
                     </form>
             </div>

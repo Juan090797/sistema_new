@@ -50,7 +50,7 @@
                         <div class="user-block">
                         <img class="img-circle img-bordered-sm" src="{{ asset('img/user1-128x128.jpg')}}" alt="user image">
                         <span class="username">
-                            <h4 style="color:#0A7BBB";>{{$ticket->user->first_name.' '. $ticket->user->last_name}}</h4>
+                            <h4 style="color:#0A7BBB";>{{$ticket->requesteruser->first_name.' '. $ticket->requesteruser->last_name}}</h4>
                         </span>
                         <span class="description">{{$ticket->created_at->diffForHumans()}}</span>
                         </div>
@@ -58,11 +58,12 @@
                             {{$ticket->descripcion_tk}}
                         </p>
                         <p>
-                            {{-- <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Compartir</a> --}}
+                            <a href="#" class="link-black text-sm mr-2"></a>
                             <span class="float-right">
-                            {{-- <a href="#" class="link-black text-sm"> --}}
                                 <i class="far fa-comments mr-1"></i> Comentarios ({{count($comentarios)}})
-                            {{-- </a> --}}
+                            </span>
+                            <span class="float-left">
+                                <a href="/download/{{$ticket->archivo_tk}}">{{$ticket->archivo_tk}}</a>
                             </span>
                         </p>
                         <form method="POST" action="{{ route('comentario.guardar') }}">
@@ -168,11 +169,11 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="user_id">Tecnico</label>
-                            <select name="user_id" class="form-control" id="user_id" disabled>
+                            <label for="tecnico_user_id">Tecnico</label>
+                            <select name="tecnico_user_id" class="form-control" id="tecnico_user_id" disabled>
                                 <option value="">Selecionar</option>
                                 @foreach($usuarios as $usuario)
-                                    @if ($ticket->user_id == $usuario->id)
+                                    @if ($ticket->tecnico_user_id == $usuario->id)
                                         <option value="{{$usuario->id}}" selected>{{$usuario->first_name}}</option>
                                     @else
                                         <option value="{{$usuario->id}}">{{$usuario->first_name}}</option>
