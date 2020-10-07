@@ -44,7 +44,7 @@ class CloseNotify extends Notification
         $url = url('ticket/'.$this->ticket->id);
         return (new MailMessage)
                     ->subject('Se cerro el ticket  #'.$this->ticket->id)
-                    ->line('Se cerro el ticket  #'.$this->ticket->idk)
+                    ->line('Se cerro el ticket  #'.$this->ticket->id)
                     ->action('Ver Ticket', $url);
     }
 

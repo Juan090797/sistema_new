@@ -29,8 +29,8 @@ class TicketController extends Controller
      */
     public function index()
     {
-        // $tickets = Auth::user()->ticket()->orderBy("id","desc")->get();
-        $tickets = Ticket::orderBy("id","desc")->get();
+        $tickets = Ticket::orderBy('id','desc')->paginate(5);
+
         // dd($tickets);
 
         return view('tickets.index', ['tickets' => $tickets]);
@@ -66,8 +66,6 @@ class TicketController extends Controller
     {
         if(Auth::check()){
 
-
-
         }else{
 
 
@@ -96,8 +94,8 @@ class TicketController extends Controller
 
         // Notification::send($from, new Mensaje($ticket));
 
-        Notification::route('mail', 'soporte@repuestosfreddy.com')
-            ->notify(new Mensaje($ticket));
+        // Notification::route('mail', 'soporte@repuestosfreddy.com')
+        //     ->notify(new Mensaje($ticket));
 
         // return redirect()->view('tickets.createwait')->with('success', 'Ticket Creado');
         return back()->with('success', 'Ticket Creado');
@@ -170,8 +168,8 @@ class TicketController extends Controller
 
         // Notification::send($from, new ComentarioNotify($comentario));
 
-        Notification::route('mail', 'soporte@repuestosfreddy.com')
-            ->notify(new ComentarioNotify($comentario));
+        // Notification::route('mail', 'soporte@repuestosfreddy.com')
+        //     ->notify(new ComentarioNotify($comentario));
 
         return redirect()->route('ticket.show',['ticket'=>$request->input('ticket_id')]);
 
@@ -210,11 +208,11 @@ class TicketController extends Controller
         $evento -> ticket_id = $ticket->id;
         $evento -> save();
 
-        if($ticket->estado->nombre_est == "Cerrado"){
+        // if($ticket->estado->nombre_est == "Cerrado"){
 
-            Notification::route('mail', 'soporte@repuestosfreddy.com')
-            ->notify(new CloseNotify($ticket));
-        }
+        //     Notification::route('mail', 'soporte@repuestosfreddy.com')
+        //     ->notify(new CloseNotify($ticket));
+        // }
 
         return redirect()->route('ticket.show', $ticket->id);
     }

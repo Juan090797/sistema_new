@@ -16,58 +16,94 @@
             <!-- Info boxes -->
             <div class="row">
                 <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box">
-                    <span class="info-box-icon bg-info elevation-1"><i class="fas fa-bell"></i></span>
-                    <div class="info-box-content">
-                    <span class="info-box-text">Nuevos Tickets</span>
-                    <span class="info-box-number">
-                        {{count($ticket_nuevo)}}
-                    </span>
+                    <div class="info-box">
+                        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-bell"></i></span>
+                        <div class="info-box-content">
+                        <span class="info-box-text">Nuevos Tickets</span>
+                        <span class="info-box-number">
+                            {{count($ticket_nuevo)}}
+                        </span>
+                        </div>
+                        <!-- /.info-box-content -->
                     </div>
-                    <!-- /.info-box-content -->
-                </div>
                 <!-- /.info-box -->
                 </div>
                 <!-- /.col -->
                 <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box mb-3">
-                    <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-exclamation-triangle"></i></span>
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-exclamation-triangle"></i></span>
 
-                    <div class="info-box-content">
-                    <span class="info-box-text">Tickets Urgentes</span>
-                    <span class="info-box-number">{{count($ticket_alto)}}</span>
+                        <div class="info-box-content">
+                        <span class="info-box-text">Tickets Urgentes</span>
+                        <span class="info-box-number">{{count($ticket_alto)}}</span>
+                        </div>
+                        <!-- /.info-box-content -->
                     </div>
-                    <!-- /.info-box-content -->
-                </div>
                 <!-- /.info-box -->
                 </div>
                 <!-- /.col -->
                 <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box mb-3">
-                    <span class="info-box-icon bg-success elevation-1"><i class="nav-icon fa fa-ticket-alt"></i></span>
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-success elevation-1"><i class="nav-icon fa fa-ticket-alt"></i></span>
 
-                    <div class="info-box-content">
-                    <span class="info-box-text">Total Tickets</span>
-                    <span class="info-box-number">{{count($ticket_total)}}</span>
+                        <div class="info-box-content">
+                        <span class="info-box-text">Total Tickets</span>
+                        <span class="info-box-number">{{count($ticket_total)}}</span>
+                        </div>
+                        <!-- /.info-box-content -->
                     </div>
-                    <!-- /.info-box-content -->
-                </div>
                 <!-- /.info-box -->
                 </div>
                 <!-- /.col -->
                 <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box mb-3">
-                    <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-clipboard-check"></i></span>
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-clipboard-check"></i></span>
 
-                    <div class="info-box-content">
-                    <span class="info-box-text">Tickets Resueltos</span>
-                    <span class="info-box-number">{{count($ticket_resuelto)}}</span>
+                        <div class="info-box-content">
+                        <span class="info-box-text">Tickets Cerrados</span>
+                        <span class="info-box-number">{{count($ticket_cerrados)}}</span>
+                        </div>
+                        <!-- /.info-box-content -->
                     </div>
-                    <!-- /.info-box-content -->
-                </div>
                 <!-- /.info-box -->
                 </div>
                 <!-- /.col -->
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-clipboard-check"></i></span>
+
+                        <div class="info-box-content">
+                        <span class="info-box-text">Tickets Juan Marquina</span>
+                        <span class="info-box-number">{{count($ticket_juan)}}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                <!-- /.info-box -->
+                </div>
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-clipboard-check"></i></span>
+
+                        <div class="info-box-content">
+                        <span class="info-box-text">Tickets Noel</span>
+                        <span class="info-box-number">{{count($ticket_noel)}}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                <!-- /.info-box -->
+                </div>
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-clipboard-check"></i></span>
+
+                        <div class="info-box-content">
+                        <span class="info-box-text">Tickets Edwin</span>
+                        <span class="info-box-number">{{count($ticket_edwin)}}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                <!-- /.info-box -->
+                </div>
             </div>
             <!-- /.row -->
 

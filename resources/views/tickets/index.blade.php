@@ -87,7 +87,7 @@
             </div>
         @endforeach
         @endif
-
+        {{ $tickets->render()}}
     {{-- </div> --}}
 @endcomponent
 @endsection
