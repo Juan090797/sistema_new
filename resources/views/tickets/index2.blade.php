@@ -30,7 +30,7 @@
     @endslot
 
     {{-- <div class="col-md-12"> --}}
-        @if(count($tickets)<=0)
+        @if(count($tickets2)<=0)
                 <div class="row justify-content-center">
                     <div class="col-sm-12">
                         <div class="card">
@@ -46,40 +46,40 @@
                     </div>
                 </div>
         @else
-        @foreach ($tickets as $ticket)
+        @foreach ($tickets2 as $tickets)
             <div class="card mb-4">
                 <div class="card-body text-danger">
                     <div class="row">
                         <div class="col-md-8">
                             <div class="user-block">
-                                <img class="img-circle img-bordered-sm" src="{{ asset('storage/image_profiles/'.$ticket->requesteruser->image_path)}}" alt="user image">
+                                <img class="img-circle img-bordered-sm" src="{{ asset('storage/image_profiles/'.$tickets->requesteruser->image_path)}}" alt="user image">
                                 <span class="username">
-                                <a href="{{ route('ticket.show', $ticket->id)}}">{{$ticket->titulo_tk}}</a>
+                                <a href="{{ route('ticket.show', $tickets->id)}}">{{$tickets->titulo_tk}}</a>
                                 </span>
                                 <span class="description">
-                                    {{$ticket->requesteruser->first_name.' '. $ticket->requesteruser->last_name}}
+                                    {{$tickets->requesteruser->first_name.' '. $tickets->requesteruser->last_name}}
                                 </span>
                                 <span class="description">
-                                    {{$ticket->created_at->diffForHumans()}}
+                                    {{$tickets->created_at->diffForHumans()}}
                                 </span>
                               </div>
                         </div>
                         <div class="col-md-4">
                             <div class="user-block">
                                 <span class="description">Estado:
-                                    {{$ticket->estado->nombre_est}}
+                                    {{$tickets->estado->nombre_est}}
                                 </span>
-                                <span class="description">Categoria: {{$ticket->categoria->nombre_cat}}</span>
+                                <span class="description">Categoria: {{$tickets->categoria->nombre_cat}}</span>
                                 <span class="description">Prioridad:
-                                    @if ( $ticket->prioridad->nombre_pri === "Alto")
-                                        <span class="badge bg-danger">{{$ticket->prioridad->nombre_pri}}</span>
-                                    @elseif ( $ticket->prioridad->nombre_pri === "Medio")
-                                        <span class="badge bg-warning">{{$ticket->prioridad->nombre_pri}}</span>
+                                    @if ( $tickets->prioridad->nombre_pri === "Alto")
+                                        <span class="badge bg-danger">{{$tickets->prioridad->nombre_pri}}</span>
+                                    @elseif ( $tickets->prioridad->nombre_pri === "Medio")
+                                        <span class="badge bg-warning">{{$tickets->prioridad->nombre_pri}}</span>
                                     @else
-                                        <span class="badge bg-success">{{$ticket->prioridad->nombre_pri}}</span>
+                                        <span class="badge bg-success">{{$tickets->prioridad->nombre_pri}}</span>
                                     @endif
                                 </span>
-                                <span class="description">Tecnico: {{$ticket->tecnicouser->first_name}}</span>
+                                <span class="description">Tecnico: {{$tickets->tecnicouser->first_name}}</span>
                             </div>
                         </div>
                     </div>
@@ -87,19 +87,10 @@
             </div>
         @endforeach
         @endif
-        {{ $tickets->render()}}
+        {{ $tickets2->render()}}
     {{-- </div> --}}
 @endcomponent
 @endsection
-@if (session()->has('process_result'))
-    @section('scripts')
-        <script type="text/javascript">
-            $(function() {
-                toastr.{{ session('process_result')['status']}}('{{ session('process_result')['content']}}')
-            });
-        </script>
-    @endsection
-@endif
 
 
 

@@ -67,43 +67,6 @@
                     </div>
                 <!-- /.info-box -->
                 </div>
-                <!-- /.col -->
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box mb-3">
-                        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-clipboard-check"></i></span>
-
-                        <div class="info-box-content">
-                        <span class="info-box-text">Tickets Juan Marquina</span>
-                        <span class="info-box-number">{{count($ticket_juan)}}</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                <!-- /.info-box -->
-                </div>
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box mb-3">
-                        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-clipboard-check"></i></span>
-
-                        <div class="info-box-content">
-                        <span class="info-box-text">Tickets Noel</span>
-                        <span class="info-box-number">{{count($ticket_noel)}}</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                <!-- /.info-box -->
-                </div>
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box mb-3">
-                        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-clipboard-check"></i></span>
-
-                        <div class="info-box-content">
-                        <span class="info-box-text">Tickets Edwin</span>
-                        <span class="info-box-number">{{count($ticket_edwin)}}</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                <!-- /.info-box -->
-                </div>
             </div>
             <!-- /.row -->
 

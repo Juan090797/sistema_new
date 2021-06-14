@@ -95,7 +95,7 @@
             @endif
         </div>
 
-
+        @if(auth()->user()->id == 1)
         <div class="col-md-4">
             <div class="card">
                     <div class="card-header">
@@ -165,5 +165,76 @@
                     </form>
             </div>
         </div>
+        @else
+        <div class="col-md-4">
+            <div class="card">
+                    <div class="card-header">
+                    <h6><strong>Propiedades</strong></h6>
+                    </div>
+                    <div class="card-body">
+                    <form method="post" action="{{ route('ticket.update', $ticket->id) }}">
+                    @method('PATCH')
+                    @csrf
+                        <div class="form-group">
+                            <label for="estado_id">Estado</label>
+                            <select name="estado_id" class="form-control" disabled>
+                                <option value="">Selecionar</option>
+                                @foreach($estados as $estado)
+                                    @if ($ticket->estado_id == $estado->id)
+                                        <option value="{{$estado->id}}" selected>{{$estado->nombre_est}}</option>
+                                    @else
+                                        <option value="{{$estado->id}}">{{$estado->nombre_est}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="categoria_id">Categoria</label>
+                            <select name="categoria_id" class="form-control" disabled>
+                                <option value="">Selecionar</option>
+                                @foreach($categorias as $categoria)
+                                    @if ($ticket->categoria_id == $categoria->id)
+                                        <option value="{{$categoria->id}}" selected>{{$categoria->nombre_cat}}</option>
+                                    @else
+                                        <option value="{{$categoria->id}}">{{$categoria->nombre_cat}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="prioridad_id">Prioridad</label>
+                            <select name="prioridad_id" class="form-control" disabled> 
+                                <option value="">Selecionar</option>
+                                @foreach($prioridades as $prioridad)
+                                    @if ($ticket->prioridad_id == $prioridad->id)
+                                        <option value="{{$prioridad->id}}" selected>{{$prioridad->nombre_pri}}</option>
+                                    @else
+                                        <option value="{{$prioridad->id}}">{{$prioridad->nombre_pri}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="tecnico_user_id">Tecnico</label>
+                            <select name="tecnico_user_id" class="form-control" id="tecnico_user_id" disabled>
+                                <option value="">Selecionar</option>
+                                @foreach($usuarios as $usuario)
+                                    @if ($ticket->tecnico_user_id == $usuario->id)
+                                        <option value="{{$usuario->id}}" selected>{{$usuario->first_name}}</option>
+                                    @else
+                                        <option value="{{$usuario->id}}">{{$usuario->first_name}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <!-- <div class="card-footer">
+                        <button type="submit" class="btn btn-outline-success float-right">Guardar</button>
+                        <a href="{{ route('empresa.index') }}" class="btn btn-outline-danger">Cancelar</a>
+                    </div> -->
+                    </form>
+            </div>
+        </div>
+        @endif
 </div>
 @endsection

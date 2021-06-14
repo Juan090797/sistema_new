@@ -34,8 +34,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                @yield('breadcrumbs')
+            <!-- <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li> -->
+                <!-- @yield('breadcrumbs') -->
             </ol>
           </div>
         </div>

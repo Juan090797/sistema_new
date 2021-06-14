@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', 'Auth\LoginController@showLoginForm')->name('login');
+Auth::routes();
 Route::get('home', 'HomeController')->name('home');
 
 Route::resource('user', 'UserController')->names('user');
@@ -25,4 +27,9 @@ Route::resource('categorias', 'CategoriaController')->names('categoria');
 Route::resource('estados', 'Estado_tkController')->names('estado');
 Route::resource('prioridad', 'PrioridadController')->names('prioridad');
 Route::resource('tipo_tk', 'Tipo_tkController')->names('tipo_tk');
+
+Route::resource('ticket', 'TicketController')->names('ticket');
+Route::post('/ticket/comentario','TicketController@comentarioGuardar')->name('comentario.guardar');
+Route::get('/download/{archivo}', 'TicketController@getDownload')->name('descarga');
+
 

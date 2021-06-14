@@ -29,11 +29,15 @@ class TicketController extends Controller
      */
     public function index()
     {
-        $tickets = Ticket::orderBy('id','desc')->paginate(5);
+        $tickets = Ticket::where('estado_id',1)->orderBy('id','desc')->paginate(5);
+        $tickets2 = Ticket::where('requester_user_id',auth()->user()->id)->orderBy('id','desc')->paginate(5);
 
-        // dd($tickets);
-
-        return view('tickets.index', ['tickets' => $tickets]);
+        if(auth()->user()->id ==1){
+            return view('tickets.index', ['tickets' => $tickets]);
+        }else{
+            return view('tickets.index2', ['tickets2' => $tickets2]);
+        }
+        
     }
 
     /**
@@ -49,11 +53,9 @@ class TicketController extends Controller
         $estados = Estado_tk::all();
         $usuarios = User::all();
 
-        if(Auth::check()){
-            return view('tickets.create', ["tipos" => $tipos, "categorias" => $categorias, "prioridades" => $prioridades, "usuarios" => $usuarios, "estados" => $estados]);
-        }else{
-            return view('tickets.createwait', ["tipos" => $tipos, "categorias" => $categorias, "prioridades" => $prioridades, "usuarios" => $usuarios]);
-        }
+        return view('tickets.create', ["tipos" => $tipos, "categorias" => $categorias, 
+                                    "prioridades" => $prioridades, "usuarios" => $usuarios, "estados" => $estados]);
+
     }
 
     /**
@@ -62,43 +64,36 @@ class TicketController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateTicketRequest $request,Ticket $ticket)
+    public function store(Request $request)
     {
-        if(Auth::check()){
+        $status = 'success' ;
+        $content = 'El ticket ha sido creado';
+        $ticket = new Ticket();
+        $ticket -> titulo_tk = strtolower($request->titulo_tk);
+        $ticket -> descripcion_tk = strtolower($request->descripcion_tk);
+        $ticket -> prioridad_id = $request->prioridad_id;
+        $ticket -> categoria_id = $request->categoria_id;
+        $ticket -> tipo_id = $request->tipo_id;
+        $ticket -> estado_id = 1;
+        $ticket -> tecnico_user_id  = 1;
+        $ticket -> requester_user_id = auth()->user()->id;
 
-        }else{
-
-
-            $ticket = new Ticket();
-            $ticket->fill($request->all());
-            $ticket -> prioridad_id = 1;
-            $ticket -> categoria_id = 1;
-            $ticket -> tipo_id = 1;
-            $ticket -> estado_id = 1;
-            $ticket -> tecnico_user_id  = 2;
-            $ticket -> requester_user_id = $request->input('requester_user_id');
-
-            if ($request->hasFile('archivo_tk')){
+        if ($request->hasFile('archivo_tk'))
+            {
                 $ubicacion = 'public\archivos';
                 $archivo_name = $request->archivo_tk->getClientOriginalName();
                 $path = $request->file('archivo_tk')->storeAs($ubicacion, $archivo_name);
                 $ticket -> archivo_tk = $archivo_name;
             }
 
-            $ticket -> created_by = $request->input('requester_user_id');
-            $ticket -> updated_by = $request->input('requester_user_id');
-            $ticket -> save();
-        }
+        $ticket -> created_by = 1;
+        $ticket -> updated_by = 1;
+        $ticket -> save();
 
-        // $from = User::findOrFail($request->input('requester_user_id'));
-
-        // Notification::send($from, new Mensaje($ticket));
-
-        // Notification::route('mail', 'soporte@repuestosfreddy.com')
-        //     ->notify(new Mensaje($ticket));
-
-        // return redirect()->view('tickets.createwait')->with('success', 'Ticket Creado');
-        return back()->with('success', 'Ticket Creado');
+        return redirect()->route('ticket.index')->with('process_result', [
+                'status' => $status,
+                'content' =>$content,
+                ]);
     }
 
     /**
@@ -116,55 +111,30 @@ class TicketController extends Controller
         $comentarios = Comentario::where('ticket_id','=',$ticket->id)->orderBy('id', 'desc')->get();
 
         $userauth = Auth::user();
-        // dd($userauth->area_id);
 
-        if(Auth::check()){
-            return view('tickets.show',
-            ['ticket' => $ticket, 'comentarios' => $comentarios, 'categorias' => $categorias,
-            'prioridades' => $prioridades, 'usuarios' => $usuarios, 'estados' => $estados]);
-        }else{
-
-            return view('tickets.showwait',
-            ['ticket' => $ticket, 'comentarios' => $comentarios, 'categorias' => $categorias,
-            'prioridades' => $prioridades, 'usuarios' => $usuarios, 'estados' => $estados]);
-        }
+        return view('tickets.show',['ticket' => $ticket, 'comentarios' => $comentarios, 'categorias' => $categorias,
+                                    'prioridades' => $prioridades, 'usuarios' => $usuarios, 'estados' => $estados]);
 
     }
 
     public function getDownload($archivo){
 
-            // $pathtoFile = public_path().'/archivos/'.$archivo;
+        return response()->download('storage/archivos/'.$archivo);
 
-            return response()->download('storage/archivos/'.$archivo);
     }
 
     public function comentarioGuardar(Request $request){
 
-        if(Auth::check()){
-            $user =$request->input('user_id');
-            $comentario = new Comentario();
-            $comentario->fill($request->all());
-            $comentario->user_id=Auth::user()->id;
-            $comentario -> created_by = Auth::user()->id;
-            $comentario -> updated_by = Auth::user()->id;
-            $comentario->save();
+        $user =$request->input('user_id');
+        $comentario = new Comentario();
+        $comentario->fill($request->all());
+        $comentario->user_id=Auth::user()->id;
+        $comentario -> created_by = Auth::user()->id;
+        $comentario -> updated_by = Auth::user()->id;
+        $comentario->save();
 
-            // $from = User::findOrFail($user);
-            // Notification::send($from, new ComentarioNotify($comentario));
-
-        }else{
-
-            $user =$request->input('user_id');
-            $comentario = new Comentario();
-            $comentario->fill($request->all());
-            $comentario->user_id = User::findOrFail($user)->id;
-            $comentario -> created_by = User::findOrFail($user)->id;
-            $comentario -> updated_by = User::findOrFail($user)->id;
-            $comentario->save();
-
-            // $from = User::findOrFail($user);
-            // Notification::send($from, new ComentarioNotify($comentario));
-        }
+        // $from = User::findOrFail($user);
+        // Notification::send($from, new ComentarioNotify($comentario));
 
         // Notification::send($from, new ComentarioNotify($comentario));
 
